@@ -75,7 +75,7 @@ int main()
               //cout<<airportArr.l;
             }
             if (!(c % 1000))
-                cout << temp->code << " long: " << temp->longitude << " lat: " << temp->latitude <<  endl;
+               // cout << temp->code << " long: " << temp->longitude << " lat: " << temp->latitude <<  endl;
             
             
             // if (!(c % 1000))
@@ -91,8 +91,10 @@ int main()
         }
         airportCount = c-1;
         infile.close();
+        float max = 0; 
+        string cod; 
         
-         for (int c=0; c < airportCount; c++)
+         for (int c=1; c < airportCount; c++){
             if (!(c % 1000))
             {
               Airport *temp = new Airport();
@@ -102,13 +104,21 @@ int main()
               temp1 = (Airport*)((airportArr.get(c+1))->v);
               string test = (string)(temp->code);
               double test2 = temp->longitude;
-                cout << (string)(temp->code) << " long: " << temp->longitude << " lat: " << temp->latitude <<  endl;
-                cout << temp1->code << " long: " << temp1->longitude << " lat: " << temp1->latitude <<  endl;
-                cout <<"Distance between " << temp->code << " and " << temp1->code << " is "
-                  << distanceEarth( temp->longitude, temp->latitude , temp1->longitude, temp1->latitude) << endl;
+                //cout << (string)(temp->code) << " long: " << temp->longitude << " lat: " << temp->latitude <<  endl;
+               // cout << temp1->code << " long: " << temp1->longitude << " lat: " << temp1->latitude <<  endl;
+               // cout <<"Distance between " << temp->code << " and " << temp1->code << " is "
+                  //<< distanceEarth( temp->longitude, temp->latitude , temp1->longitude, temp1->latitude) << endl;
             }
-
-
+            
+        if (distanceEarth(((Airport*)(airportArr.get(10643)->v))->longitude,((Airport*)(airportArr.get(10643)->v))->latitude, ((Airport*)((airportArr.get(c))->v))->longitude, ((Airport*)((airportArr.get(c))->v))->latitude)>max){
+            cod = (string)((Airport*)((airportArr.get(c))->v))->code; 
+            max = distanceEarth(((Airport*)(airportArr.get(10643)->v))->longitude,((Airport*)(airportArr.get(10643)->v))->latitude, ((Airport*)((airportArr.get(c))->v))->longitude, ((Airport*)((airportArr.get(c))->v))->latitude);
+        }
+        else if(distanceEarth(((Airport*)(airportArr.get(10643)->v))->longitude,((Airport*)(airportArr.get(10643)->v))->latitude, ((Airport*)((airportArr.get(c))->v))->longitude, ((Airport*)((airportArr.get(c))->v))->latitude)<=100){
+            cout<<(string)((Airport*)((airportArr.get(c))->v))->code<<endl;
+        }
+}
+cout<<cod;
 
     }
     else
